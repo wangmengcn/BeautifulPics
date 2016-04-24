@@ -38,5 +38,4 @@ def get_url(start,end):
 		time.sleep(10)
 		head = head-1
 
-get_url(1899, 1850)
-
+get_url(1699, 1650)
