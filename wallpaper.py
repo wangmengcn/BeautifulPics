@@ -50,11 +50,13 @@ def get_tags():
                     print os.path.exists(filepath)
                     if not os.path.exists(filepath):
                         os.mkdir(filepath)
+                        floder+=1
                         linkend = 1
-                        print taglink + "index" + str(linkend) + ".html"
-                        while download(taglink + "index" + str(linkend) + ".html", filepath):
-                            linkend += 1
-                            floder += 1
+                        picinit = taglink + "index" + str(linkend) + ".html"
+                        while download(picinit,filepath):
+                            linkend+=1
+                            picinit =  taglink + "index" + str(linkend) + ".html"
+                        
                     else:
                     	floder+=1
                         continue
@@ -114,16 +116,17 @@ def get_file(url, filename, path):
         r = session.get(url, headers=headers)
         #print r.text.encode('utf-8')
         print filename
-        path = '.'
-        print path + "/" + filename + '.jpg'
-        try:
+        picname = path + "/" + filename + '.jpg'
+        with open(picname, 'wb') as f:
+            f.write(r.content)
+            #f.close()
+        time.sleep(3)
 
-            with open(path + "/" + filename + '.jpg', 'wb') as f:
-                f.write(r.content)
-                f.close()
-                time.sleep(3)
-        except:
-            print "文件保存出错"
 
-get_tags()
-#get_file("http://interfacelift.com/wallpaper/7yz4ma1/2031_ageeba_1440x900.jpg",'adas','.')
+#get_tags()
+#get_file("http://interfacelift.com/wallpaper/7yz4ma1/01178_chicagoatnight_1440x900.jpg",'adas','.')
+
+def test():
+    get_tags()
+
+test()
