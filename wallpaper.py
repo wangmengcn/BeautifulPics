@@ -119,6 +119,7 @@ def get_file(url, filename, path):
         picname = path + "/" + filename + '.jpg'
         with open(picname, 'wb') as f:
             f.write(r.content)
+            print picname,"完成下载"
             #f.close()
         time.sleep(3)
 
