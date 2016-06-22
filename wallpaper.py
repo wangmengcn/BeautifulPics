@@ -50,19 +50,20 @@ def get_tags():
                     print os.path.exists(filepath)
                     if not os.path.exists(filepath):
                         os.mkdir(filepath)
-                        floder+=1
+                        floder += 1
                         linkend = 1
                         picinit = taglink + "index" + str(linkend) + ".html"
-                        while download(picinit,filepath):
-                            linkend+=1
-                            picinit =  taglink + "index" + str(linkend) + ".html"
-                        
+                        while download(picinit, filepath):
+                            linkend += 1
+                            picinit = taglink + "index" + \
+                                str(linkend) + ".html"
+
                     else:
-                    	floder+=1
+                        floder += 1
                         continue
                 except:
-                	floder+=1
-                	print "下载出错"
+                    floder += 1
+                    print "下载出错"
         except Exception, e:
             print "出错了"
 
@@ -88,7 +89,7 @@ def download(picurl, path):
                             cleanbase = cleanbase.replace('%2C', '')
                             cleanbase = cleanbase.replace('%27', '')
                         downloadurl = get_picurl(cleanbase, id, foo='1440x900')
-                        print downloadurl,"--->",path
+                        print downloadurl, "--->", path
                         print cleanbase
                         get_file(downloadurl, cleanbase, path)
                     split += 1
@@ -114,18 +115,18 @@ def get_picurl(base=None, id=None, foo='1440x900'):
 def get_file(url, filename, path):
     if url:
         r = session.get(url, headers=headers)
-        #print r.text.encode('utf-8')
+        # print r.text.encode('utf-8')
         print filename
         picname = path + "/" + filename + '.jpg'
         with open(picname, 'wb') as f:
             f.write(r.content)
-            print picname,"完成下载"
-            #f.close()
+            print picname, "完成下载"
+            # f.close()
         time.sleep(3)
 
 
-#get_tags()
-#get_file("http://interfacelift.com/wallpaper/7yz4ma1/01178_chicagoatnight_1440x900.jpg",'adas','.')
+# get_tags()
+# get_file("http://interfacelift.com/wallpaper/7yz4ma1/01178_chicagoatnight_1440x900.jpg",'adas','.')
 
 def test():
     get_tags()
